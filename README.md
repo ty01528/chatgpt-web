@@ -89,7 +89,7 @@ services:
     environment:
       - OPENAI_API_KEY=前面你获取到的OpenAI API KEY
     volumes:
-      - ./chat.html:/chatgpt-web/templates/chat.html
+      - ./index.html:/chatgpt-web/templates/index.html
     ports:
       - "8888:80" #80为容器内部端口，不可更改；8888为外部映射端口，可自行更改
     restart: always
