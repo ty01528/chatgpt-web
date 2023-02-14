@@ -15,7 +15,7 @@
 <div align="center">
     <div class="chat_window">
         <div class="top_menu">
-            <div class="buttons">
+            <div class="buttons" onclick="clearHistory()">
                 <div class="button close"></div>
                 <div class="button minimize"></div>
                 <div class="button maximize"></div>
@@ -23,7 +23,7 @@
             <div class="title">FAKE GPT</div>
         </div>
         <ul class="messages" id="messageList">
-            <div id="loading" style="display:none; color:red"><b>后端正在处理，请稍等，切勿重复提交...</b></div>
+            <div id="loading" style="display:none; color:red" class="load_pic rubik-loader"></div>
         </ul>
         <div class="bottom_wrapper clearfix">
             <textarea class="message_input_wrapper" name="question" placeholder="点击这里输入问题" id="question"></textarea>

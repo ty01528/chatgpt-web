@@ -18,7 +18,7 @@ body {
     position: absolute;
     width: calc(100% - 20px);
     max-width: 800px;
-    height: 500px;
+    height: calc(90% - 200px);
     border-radius: 10px;
     background-color: #fff;
     left: 50%;
@@ -67,7 +67,7 @@ body {
     list-style: none;
     padding: 20px 10px 0 10px;
     margin: 0;
-    height: 347px;
+    height: calc(100% - 150px);
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -149,7 +149,6 @@ body {
 }
 
 .bottom_wrapper {
-    position: relative;
     width: 100%;
     background-color: #fff;
     padding: 20px 20px;
@@ -159,26 +158,26 @@ body {
 .bottom_wrapper .message_input_wrapper {
     display: inline-block;
     height: 50px;
-    border-radius: 25px;
+    border-radius: 20px;
     border: 1px solid #bcbdc0;
-    width: calc(100% - 160px);
+    width: calc(100% - 120px);
     position: relative;
-    padding: 0 20px;
+    padding: 8px 20px 0;
 }
 .bottom_wrapper .message_input_wrapper .message_input {
     border: none;
     height: 100%;
     box-sizing: border-box;
-    width: calc(100% - 40px);
+    width: calc(100% - 120px);
     position: absolute;
     outline-width: 0;
     color: gray;
 }
 .bottom_wrapper .send_message {
-    width: 140px;
+    width: 110px;
     height: 50px;
     display: inline-block;
-    border-radius: 50px;
+    border-radius: 20px;
     background-color: #a3d063;
     border: 2px solid #a3d063;
     color: #fff;
@@ -200,4 +199,53 @@ body {
 
 .message_template {
     display: none;
+}
+
+.reset_button_wrapper {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+.reset_button {
+    width: 80px;
+    height: 35px;
+    display: inline-block;
+    border-radius: 10px;
+    background-color: #bcbdc0;
+    border: 2px solid #bcbdc0;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    text-align: center;
+}
+.reset_button:hover {
+    color: #bcbdc0;
+    background-color: #fff;
+}
+.reset_button .text {
+    font-size: 18px;
+    font-weight: 300;
+    display: inline-block;
+    line-height: 48px;
+}
+
+.load_pic{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff
+}
+
+.rubik-loader{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: calc(50% - 25px);
+    /*top: 8px;*/
+    transform: scale(0.5);
+    background-image: url(http://i.giphy.com/3og0ISeflb7vrNzy2A.gif);
+    background-repeat: no-repeat;
+    background-position: center;
 }

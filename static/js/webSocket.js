@@ -1,5 +1,6 @@
 const ws = new WebSocket("ws://localhost:80/ws");
 let historyMessage = [];
+let historyAnswer = "";
 document.createElement('li').style.whiteSpace = 'pre-wrap';
 function submitQuestion(){
     let question = document.getElementById('question');
@@ -12,8 +13,12 @@ function submitQuestion(){
     }
 
     historyMessage.push(message);
+    if (historyMessage.length > 5) {
+        // 保留最后五条消息
+        historyMessage = historyMessage.slice(-5);
+    }
     //
-    ws.send(JSON.stringify({history: historyMessage}));
+    ws.send(JSON.stringify({history: historyMessage,historyAnswer: historyAnswer}));
     question.value = '';
     let li = document.createElement('li');
     li.style.marginTop = '10px';
@@ -56,11 +61,17 @@ ws.onmessage = (event) => {
     var text = document.createTextNode(message.message);
     li.innerText = message.message;
     console.log("message"+message.message)
+    historyAnswer = message.message;
     chatBox.appendChild(questDiv);
     questDiv.appendChild(li);
     // 将 li 元素添加到 ul 元素中
 };
-
+function clearHistory(){
+    historyMessage = [];
+    historyAnswer = "";
+    let chatBox = document.getElementById('messageList');
+    chatBox.innerHTML = "";
+}
 ws.onerror = function(event) {
     console.error("WebSocket error observed:", event);
 };
