@@ -89,7 +89,7 @@ func HandleWS(c *gin.Context) {
 	}
 }
 func getCompletion(session *ChatSession, question string, key string) (string, error) {
-	client := gogpt.NewClient("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")
+	client := gogpt.NewClient("")
 	ctx := context.Background()
 	prompt := ""
 	if len(session.History) != 1 {
