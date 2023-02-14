@@ -35,6 +35,8 @@ go build main.go
 注意： ker.config文件中的key需要自己去[openai](https://openai.com/)申请,并且需要将key填入其中,否则无法使用。
 同时key.config需要和可执行文件在同一目录下！！
 
+如果KEY不起作用，你可以尝试在[handleWS.go](src/handleWS.go)中将 ```client := gogpt.NewClient(key) ```中的key指定为字符串```client := gogpt.NewClient("*******") ```
+
 ### 项目截图
 ![image](img.png)
 ### 本项目仅供学习交流使用，不得用于商业用途
