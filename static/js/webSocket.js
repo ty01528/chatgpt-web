@@ -34,6 +34,7 @@ function submitQuestion(){
     // 将 li 元素添加到 ul 元素中
     chatBox.appendChild(questDiv);
     questDiv.appendChild(li);
+    chatBox.scrollTop = chatBox.scrollHeight;
     loading.style.display = 'block';
     // 启用提交按钮
     document.getElementById('submit').disabled = false;
@@ -64,6 +65,7 @@ ws.onmessage = (event) => {
     historyAnswer = message.message;
     chatBox.appendChild(questDiv);
     questDiv.appendChild(li);
+    chatBox.scrollTop = chatBox.scrollHeight;
     // 将 li 元素添加到 ul 元素中
 };
 function clearHistory(){
