@@ -249,3 +249,13 @@ body {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.content{
+    /*在界面的底部*/
+    position: absolute;
+    bottom: 3px;
+    width: 100%;
+    text-align: center;
+    color: #bcbdc0;
+    background-color: #edeff2;
+}
