@@ -51,10 +51,10 @@ func HandleWS(c *gin.Context) {
 		question := ""
 		if len(session.History) == 1 {
 			log.Println("History is empty")
-			question = "Prompt(Ask): " + session.History[0] + "(Direct Answer,think step by step)"
+			question = "Prompt(Ask): " + session.History[0] + "(Think step by step,What you need to answer is the ASK question, prompt has some of the above I gave you that you can refer to. Describe your answer directly)"
 		} else {
 			question = session.History[len(session.History)-1]
-			question = "Prompt(Ask): " + question
+			question = "Prompt(Ask): " + question + "Think step by step,What you need to answer is the ASK question, prompt has some of the above I gave you that you can refer to. Describe your answer directly"
 			session.History = session.History[:len(session.History)-1]
 			//为前几个session的问题添加字符串：Previous Questions：
 			for i := 0; i < len(session.History)-1; i++ {
@@ -89,7 +89,7 @@ func HandleWS(c *gin.Context) {
 	}
 }
 func getCompletion(session *ChatSession, question string, key string) (string, error) {
-	client := gogpt.NewClient(key)
+	client := gogpt.NewClient("")
 	ctx := context.Background()
 	prompt := ""
 	if len(session.History) != 1 {
