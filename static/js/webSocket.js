@@ -1,4 +1,4 @@
-const ws = new WebSocket("ws://localhost:80/ws");
+const ws = new WebSocket("ws://43.155.176.6:80/ws");
 let historyMessage = [];
 let historyAnswer = "";
 document.createElement('li').style.whiteSpace = 'pre-wrap';

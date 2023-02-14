@@ -5,6 +5,8 @@
 body {
     background-color: #edeff2;
     font-family: "Calibri", "Roboto", sans-serif;
+    /*overflow-y: hidden;*/
+    /*overflow-x: hidden;*/
 }
 
 @media (prefers-color-scheme: dark) {
@@ -254,8 +256,9 @@ body {
     /*在界面的底部*/
     position: absolute;
     bottom: 3px;
-    width: 100%;
+    width: calc(100% - 20px);
     text-align: center;
     color: #bcbdc0;
     background-color: #edeff2;
+    overflow: hidden;
 }
