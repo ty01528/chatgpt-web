@@ -18,8 +18,11 @@
     ├── handleWS.go  处理WS请求
     └── Route.go     路由
 ```
+注意： ker.config文件中的key需要自己去[openai](https://openai.com/)申请,并且需要将key填入其中,否则无法使用。
+同时key.config需要和可执行文件在同一目录下！！
 
-### 使用方法(你可以直接下载二进制文件使用)
+前端文件[webSocket.js](static/js/webSocket.js)中的```ws = new WebSocket("ws://localhost:8080/ws");```需要修改为你的服务器地址
+### 使用方法(你可以直接下载二进制文件使用)❌明天再改
 #### 1. 安装依赖
 ```
 go mod download
@@ -32,8 +35,6 @@ go build main.go
 ```
 ./main
 ```
-注意： ker.config文件中的key需要自己去[openai](https://openai.com/)申请,并且需要将key填入其中,否则无法使用。
-同时key.config需要和可执行文件在同一目录下！！
 
 如果KEY不起作用，你可以尝试在[handleWS.go](src/handleWS.go)中将 ```client := gogpt.NewClient(key) ```中的key指定为字符串```client := gogpt.NewClient("*******") ```
 
