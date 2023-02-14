@@ -16,6 +16,7 @@ func SetRoute(r *gin.Engine, FS embed.FS) {
 	fStatic, _ := fs.Sub(FS, "static")
 
 	r.StaticFS("/static", http.FS(fStatic))
+	r.GET("/", index)
 
 	r.GET("/chat", index)
 	r.GET("/ws", HandleWS)

@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	gogpt "github.com/sashabaranov/go-gpt3"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -22,6 +23,13 @@ var upgrader = websocket.Upgrader{
 }
 
 func HandleWS(c *gin.Context) {
+	//读取key.config中的密钥
+	key, err := ioutil.ReadFile("key.config")
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	//设置密钥
 	ws, err := upgrader.Upgrade(c.Writer, c.Request, nil)
 	if err != nil {
 		log.Println(err)
@@ -56,7 +64,7 @@ func HandleWS(c *gin.Context) {
 			session.History = append(session.History, PreviousAnswer)
 			//session.History[len(session.History)-1] = "Previous Questions: " + session.History[len(session.History)-1]
 		}
-		res, err := getCompletion(session, question)
+		res, err := getCompletion(session, question, string(key))
 		if err != nil {
 			message := err.Error()
 			log.Println("Err:", message)
@@ -80,8 +88,8 @@ func HandleWS(c *gin.Context) {
 		})
 	}
 }
-func getCompletion(session *ChatSession, question string) (string, error) {
-	client := gogpt.NewClient("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")
+func getCompletion(session *ChatSession, question string, key string) (string, error) {
+	client := gogpt.NewClient(key)
 	ctx := context.Background()
 	prompt := ""
 	if len(session.History) != 1 {
