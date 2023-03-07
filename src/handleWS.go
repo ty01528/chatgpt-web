@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	gogpt "github.com/sashabaranov/go-gpt3"
+	gogpt "github.com/sashabaranov/go-openai"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -90,7 +90,6 @@ func HandleWS(c *gin.Context) {
 }
 func getCompletion(session *ChatSession, question string, key string) (string, error) {
 	client := gogpt.NewClient("")
-	ctx := context.Background()
 	prompt := ""
 	if len(session.History) != 1 {
 		for _, q := range session.History {
@@ -98,17 +97,32 @@ func getCompletion(session *ChatSession, question string, key string) (string, e
 		}
 	}
 	prompt += question + "\n"
-	req := gogpt.CompletionRequest{
-		Model:     gogpt.GPT3TextDavinci003,
-		MaxTokens: 1024,
-		Prompt:    prompt,
-	}
+	resp, err := client.CreateChatCompletion(
+		context.Background(),
+		gogpt.ChatCompletionRequest{
+			Model: gogpt.GPT3Dot5Turbo,
+			Messages: []gogpt.ChatCompletionMessage{
+				//system用来指导系统的回答
+				//assistant用来存放先前系统的响应
+				//user用来存放用户的输入
+				//最后一个user是要回答的问题
+				{
+					Role:    gogpt.ChatMessageRoleSystem,
+					Content: "你是一个乐于助人的助理，请深思熟虑的作答",
+				},
+				{
+					Role:    gogpt.ChatMessageRoleUser,
+					Content: prompt,
+				},
+			},
+		},
+	)
 	log.Print("Prompt:" + prompt)
-	completion, err := client.CreateCompletion(ctx, req)
+
 	if err != nil {
 		return "", err
 	}
-	answer := completion.Choices[0].Text
+	answer := resp.Choices[0].Message.Content
 	session.History = append(session.History, question)
 	session.History = append(session.History, answer)
 	log.Print("Answer:", answer)
